@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
  * You can customize and organize it to your needs.
  * Good luck!
  */
-const db = initializeDatabase();
+const db = initializeDatabase;
 
 app.use(cors());
 app.use(express.json());
