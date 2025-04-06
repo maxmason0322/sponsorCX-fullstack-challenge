@@ -59,4 +59,4 @@ function initializeTables(db: DatabaseType) {
   ).run();
 }
 
-export default getDatabase();
+export default getDatabase;
