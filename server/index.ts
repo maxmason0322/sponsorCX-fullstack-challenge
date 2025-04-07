@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 import getDatabase from "./db";
+import organizationsRoutes from "./routes/organizations";
+import accountsRoutes from "./routes/accounts";
+import dealsRoutes from "./routes/deals";
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -16,6 +20,9 @@ const db = getDatabase();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/organizations", organizationsRoutes);
+app.use("/accounts", accountsRoutes);
+app.use("/deals", dealsRoutes);
 
 app.get("/", (req, res) => {
   const rows = db.prepare("SELECT * FROM organizations").all();
