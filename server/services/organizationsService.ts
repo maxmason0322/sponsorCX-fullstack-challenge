@@ -24,10 +24,11 @@ export function fetchOrganizationById(id: number) {
   return organization;
 }
 
+// This function returns all of the organization's accounts and their deals at once
 export function fetchOrganizationDetails(
   id: number
 ): OrganizationDetails | null {
-  // Get organization
+  // Get the organization
   const organization = db
     .prepare("SELECT * FROM organizations WHERE id = ?")
     .get(id) as Organization | null;
@@ -36,12 +37,12 @@ export function fetchOrganizationDetails(
     return null;
   }
 
-  // Get all accounts for this organization
+  // Get all of the accounts for this organization
   const accounts = db
     .prepare("SELECT * FROM accounts WHERE organization_id = ?")
     .all(id) as Account[];
 
-  // Get all deals for these accounts
+  // Get all of the deals for the organizations accounts
   const accountIds = accounts.map((account) => account.id);
   const deals =
     accountIds.length > 0
@@ -54,7 +55,7 @@ export function fetchOrganizationDetails(
           .all(...accountIds) as Deal[])
       : [];
 
-  // Group deals by account
+  // Group the deals by account
   const dealsByAccount = deals.reduce((acc: Record<number, Deal[]>, deal) => {
     if (!acc[deal.account_id]) {
       acc[deal.account_id] = [];
@@ -63,7 +64,7 @@ export function fetchOrganizationDetails(
     return acc;
   }, {});
 
-  // Attach deals to their respective accounts
+  // Attach the deals to their corresponding accounts
   const accountsWithDeals = accounts.map((account) => ({
     ...account,
     deals: dealsByAccount[account.id] || [],
