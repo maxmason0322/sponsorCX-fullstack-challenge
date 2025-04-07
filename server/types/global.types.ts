@@ -8,6 +8,10 @@ export interface Organization extends ModelBase {
   name: string;
 }
 
+export interface OrganizationDetails extends Organization {
+  accounts: (Account & { deals: Deal[] })[];
+}
+
 export interface Account extends ModelBase {
   organizationId: number;
   name: string;
