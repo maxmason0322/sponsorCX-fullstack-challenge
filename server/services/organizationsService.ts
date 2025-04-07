@@ -56,10 +56,10 @@ export function fetchOrganizationDetails(
 
   // Group deals by account
   const dealsByAccount = deals.reduce((acc: Record<number, Deal[]>, deal) => {
-    if (!acc[deal.accountId]) {
-      acc[deal.accountId] = [];
+    if (!acc[deal.account_id]) {
+      acc[deal.account_id] = [];
     }
-    acc[deal.accountId].push(deal);
+    acc[deal.account_id].push(deal);
     return acc;
   }, {});
 

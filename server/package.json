@@ -9,6 +9,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "nodemon --exec ts-node index.ts",
+    "seed": "ts-node seed.ts",
+    "dev:with-seed": "npm run seed && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "rphovley@gmail.com",
